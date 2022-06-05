@@ -1,0 +1,56 @@
+{
+  "name": "night-breeze",
+  "version": "1.0.0",
+  "description": "1. 安装\r ```\r npm i \r ```",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "sync:api": "npm run sync:type:api && npm run sync:handlers:api",
+    "sync:type:api": "ts-node ./scripts/sync-apitype.ts api",
+    "sync:handlers:api": "ts-node ./scripts/sync-handlers.ts api handlers",
+    "sync:apiManage": "npm run sync:type:apiManage && npm run sync:handlers:apiManage",
+    "sync:type:apiManage": "ts-node ./scripts/sync-apitype.ts apiManage",
+    "sync:handlers:apiManage": "ts-node ./scripts/sync-handlers.ts apiManage handlersManage",
+    "sync:models": " ts-node ./scripts/sync-models.ts db.sql src/models"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CQNightBreeze/night-breeze.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CQNightBreeze/night-breeze/issues"
+  },
+  "homepage": "https://github.com/CQNightBreeze/night-breeze#readme",
+  "dependencies": {
+    "@koa/cors": "^3.3.0",
+    "@koa/router": "^10.1.1",
+    "@types/joi": "^14.3.1",
+    "@types/koa": "^2.13.4",
+    "@types/node": "^17.0.38",
+    "bcryptjs": "^2.4.3",
+    "change-case": "^4.1.2",
+    "i": "^0.3.7",
+    "ioredis": "^5.0.6",
+    "joi": "^14.3.1",
+    "joi-to-interface": "^1.2.1",
+    "joi-to-json-schema": "^5.1.0",
+    "jsonwebtoken": "^8.5.1",
+    "koa": "^2.13.4",
+    "koa-bodyparser": "^4.3.0",
+    "koa-helmet": "^6.1.0",
+    "lodash": "^4.17.21",
+    "log4js": "^6.5.2",
+    "module-alias": "^2.2.2",
+    "mysql2": "^2.3.3",
+    "npm": "^8.12.1",
+    "sequelize": "^6.20.1",
+    "sql-ddl-to-json-schema": "^4.0.6"
+  },
+  "devDependencies": {
+    "@types/koa-bodyparser": "^4.3.7"
+  }
+}

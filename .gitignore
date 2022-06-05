@@ -1,0 +1,12 @@
+/node_modules
+/dist
+/logs
+/tmp
+/.docker
+/config.json
+update.sh
+public/android.apk
+app-*.pid
+__todo__.ts
+/src/envConfig.ts
+/src/test.ts

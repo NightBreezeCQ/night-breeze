@@ -1,0 +1,19 @@
+{
+  "apps": [
+    {
+      "name": "night-breeze-app",
+      "script": "dist/index.js",
+      "merge_logs": true,
+      "log_date_format": "YYYY-MM-DD HH:mm:ss Z",
+      "merge-logs": true,
+      "max_memory_restart": "1G",
+      "pid_file": "app.pid",
+      "env_production": {
+        "NODE_ENV": "production"
+      },
+      "env_development": {
+        "NODE_ENV": "development"
+      }
+    }
+  ]
+}
