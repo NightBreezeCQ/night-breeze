@@ -10,3 +10,4 @@ app-*.pid
 __todo__.ts
 /src/envConfig.ts
 /src/test.ts
+/package-lock.json

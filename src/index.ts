@@ -2,6 +2,8 @@ import "./bootstrap";
 
 import settings from "@/settings";
 import * as Koa from "koa";
+import * as path from "path";
+
 import error from "@/middlewares/error";
 import * as helmet from "koa-helmet";
 import * as bodyParser from "koa-bodyparser";
@@ -16,18 +18,24 @@ import { logger } from "@/common";
 
 
 const app = new Koa();
-
-app.use(error());
+const staticPath = '../resources'
+app.use(require('koa-static')(
+    path.join(__dirname, staticPath)
+))
 app.use(cors({
     origin: "*",
     allowHeaders: "*",
 }));
 app.use(helmet());
+app.use(error());
+
 app.use(
     bodyParser({
         enableTypes: ["json", "form", "xml"],
     }),
 );
+
+
 
 runRouter(app, [
     {

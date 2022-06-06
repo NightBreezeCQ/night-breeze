@@ -60,14 +60,7 @@ async function runServer(
             const respBody = res["200"];
             let tag = path.split('/')[1]
             const methodLower = item.method.toLowerCase()
-            // let selfSecurity = security;
-            // Object.keys(security).forEach(_key => {
-            //     swagger.security.push({ [_key]: [] });
-            // });
 
-            for (const middleware of middlewares) {
-
-            }
             if (docShow) { // 是否显示文档
                 if (!swaggers[prefix].paths[apiPath]) {
                     swaggers[prefix].paths[apiPath] = {};
@@ -202,7 +195,6 @@ async function runServer(
     app.listen(port, `${host}`, after);
     // let swaggerUrlFile = `let swaggerUrl = "${swaggerPath}/json"`;
     // fs.writeFileSync(path.join(__dirname, "../../swagger/url.js"), swaggerUrlFile);
-    // after()
 
 }
 

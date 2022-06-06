@@ -15,3 +15,6 @@ cp .\src\envConfig.example.ts .\src\envConfig.ts
 ```
 ts-node src/index.ts
 ```
+
+## 介绍
+### 文档地址：http://localhost:3000/
