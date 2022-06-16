@@ -245,9 +245,8 @@ function getType(type, unsigned) {
       return { sequelizeType, valueType };
     }
   } else if (type.datatype === "bit") {
-    const suffix = unsigned ? ".UNSIGNED" : "";
-    const valueType = "number";
-    const sequelizeType = `INTEGER()${suffix}`;
+    const valueType = "DataTypes.BlobDataTypeConstructor";
+    const sequelizeType = `BLOB()`;
     return { sequelizeType, valueType };
   } else if (type.datatype === "decimal") {
     const suffix = unsigned ? ".UNSIGNED" : "";
