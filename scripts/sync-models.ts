@@ -206,7 +206,7 @@ function spaces(n) {
 function pruneTable(table) {
   const name = table.name;
   const columns = table.columns.map(col => {
-    const { sequelizeType, valueType } = getType(col.type, col.options.unsigned);
+    const { sequelizeType, valueType } = getType(col.type, col.options.unsigned) as any;
     let defaultValue;
     if (typeof col.options.default !== "undefined") {
       if (col.options.default === "CURRENT_TIMESTAMP") {
@@ -242,6 +242,11 @@ function getType(type, unsigned) {
       const sequelizeType = `INTEGER()${suffix}`;
       return { sequelizeType, valueType };
     }
+  } else if (type.datatype === "bit") {
+    const suffix = unsigned ? ".UNSIGNED" : "";
+    const valueType = "number";
+    const sequelizeType = `INTEGER()${suffix}`;
+    return { sequelizeType, valueType };
   } else if (type.datatype === "decimal") {
     const suffix = unsigned ? ".UNSIGNED" : "";
     const valueType = DECIMAL_AS_STRING ? "string" : "number";
