@@ -211,6 +211,8 @@ function pruneTable(table) {
     if (typeof col.options.default !== "undefined") {
       if (col.options.default === "CURRENT_TIMESTAMP") {
         defaultValue = "NOW";
+      } else if (col.options.default === "b'0'") {
+        defaultValue = 0;
       } else {
         defaultValue = col.options.default;
       }
