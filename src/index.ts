@@ -15,7 +15,7 @@ import handlers from "@/handlers";
 import handlersManage from "@/handlersManage";
 import runRouter from "@/core/runServer";
 import { logger } from "@/common";
-import koaStatic from "koa-static";
+import * as koaStatic from "koa-static";
 
 const app = new Koa();
 const staticPath = "../resources";
