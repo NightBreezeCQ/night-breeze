@@ -22,7 +22,7 @@ const ErrCodes = {
   ErrNotFound: {
     status: 404,
     message: "无效的资源地址",
-  }
+  },
 };
 
 export default ErrCodes;

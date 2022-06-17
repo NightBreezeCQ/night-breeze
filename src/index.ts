@@ -15,38 +15,35 @@ import handlers from "@/handlers";
 import handlersManage from "@/handlersManage";
 import runRouter from "@/core/runServer";
 import { logger } from "@/common";
-
+import koaStatic from "koa-static";
 
 const app = new Koa();
-const staticPath = '../resources'
-app.use(require('koa-static')(
-    path.join(__dirname, staticPath)
-))
+const staticPath = "../resources";
+app.use(koaStatic(
+  path.join(__dirname, staticPath),
+));
 app.use(cors({
-    origin: "*",
-    allowHeaders: "*",
+  origin: "*",
+  allowHeaders: "*",
 }));
 app.use(helmet());
 app.use(error());
 
 app.use(
-    bodyParser({
-        enableTypes: ["json", "form", "xml"],
-    }),
+  bodyParser({
+    enableTypes: ["json", "form", "xml"],
+  }),
 );
 
-
-
 runRouter(app, [
-    {
-        prefix: "/c", breezeApis: api, handles: handlers
-    },
-    {
-        prefix: "/m", breezeApis: apiManage, handles: handlersManage
-    }
-], after)
+  {
+    prefix: "/c", breezeApis: api, handles: handlers,
+  },
+  {
+    prefix: "/m", breezeApis: apiManage, handles: handlersManage,
+  },
+], after);
 
 async function after() {
-    logger.debug("服务启动")
+  logger.debug("服务启动");
 }
-

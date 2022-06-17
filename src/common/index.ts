@@ -4,8 +4,8 @@ import logger from "@/common/logger";
 import sequlie from "@/common/sequlie";
 
 export {
-    redis,
-    errs,
-    logger,
-    sequlie
-}
+  redis,
+  errs,
+  logger,
+  sequlie,
+};

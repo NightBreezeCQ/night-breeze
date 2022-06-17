@@ -33,4 +33,3 @@ export interface UserInfoReq {
   query?: {};
   body?: {};
 }
-

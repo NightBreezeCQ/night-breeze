@@ -64,10 +64,11 @@ export default class User extends Model<UserAttributes, Partial<UserAttributes>>
       },
     );
   }
+
   public static associate() {
   }
 
-  public static userInfo = ["id", "username", "nickname"]
+  public static userInfo = ["id", "username", "nickname"];
 
   public getLoginResult() {
     const accessToken = this.getAuthToken();
@@ -83,7 +84,7 @@ export default class User extends Model<UserAttributes, Partial<UserAttributes>>
   }
 
   public getAuthToken() {
-    const { tokenSecret, tokenExpiresIn } = settings
+    const { tokenSecret, tokenExpiresIn } = settings;
     const token = jwt.sign(
       {
         id: this.id,

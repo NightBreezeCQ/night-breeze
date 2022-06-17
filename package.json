@@ -6,6 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
+    "lint": "npx eslint --ext .ts src",
+    "lint-fix": "npx eslint --ext .ts src --fix",
     "sync:api": "npm run sync:type:api && npm run sync:handlers:api",
     "sync:type:api": "ts-node ./scripts/sync-apitype.ts api",
     "sync:handlers:api": "ts-node ./scripts/sync-handlers.ts api handlers",
@@ -52,6 +54,9 @@
     "sql-ddl-to-json-schema": "^4.0.6"
   },
   "devDependencies": {
-    "@types/koa-bodyparser": "^4.3.7"
+    "@types/koa-bodyparser": "^4.3.7",
+    "@typescript-eslint/eslint-plugin": "^4.6.1",
+    "eslint": "^7.12.1",
+    "eslint-config-standard": "^16.0.1"
   }
 }

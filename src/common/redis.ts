@@ -1,12 +1,10 @@
 import Redis from "ioredis";
 import settings from "@/settings";
 
-
 class Server extends Redis {
 
 }
 
-let redis = new Server(settings.redisConfig)
+let redis = new Server(settings.redisConfig);
 
-
-export default redis
+export default redis;
