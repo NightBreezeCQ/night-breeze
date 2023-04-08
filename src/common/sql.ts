@@ -1,5 +1,5 @@
 import { Sequelize, Options } from "sequelize";
-import settings from "@/settings";
+import envConfig from "@/config/envConfig";
 import { load } from "@/models";
 
 export type Args = {
@@ -17,7 +17,7 @@ export class Service extends Sequelize {
     this.args = args;
   }
 }
-const srv = new Service(settings.sequelizeConfig);
+const srv = new Service(envConfig.sequelizeConfig);
 load(srv);
 
 export default srv;

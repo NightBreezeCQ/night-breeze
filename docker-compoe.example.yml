@@ -19,10 +19,3 @@ services:
     command: redis-server --requirepass password
     volumes:
       - ./tmp/docker/redis:/data
-  redis:
-    image: sqlserver
-    ports:
-      - 6379:6379
-    command: redis-server --requirepass password
-    volumes:
-      - ./tmp/docker/redis:/data

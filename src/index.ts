@@ -1,6 +1,5 @@
 import "./bootstrap";
 
-import settings from "@/settings";
 import * as Koa from "koa";
 import * as path from "path";
 
@@ -8,20 +7,22 @@ import error from "@/middlewares/error";
 import * as helmet from "koa-helmet";
 import * as bodyParser from "koa-bodyparser";
 import * as cors from "@koa/cors";
-import api from "@/api";
-import apiManage from "@/apiManage";
-
+import api from "@/apis/client";
+import apiManage from "@/apis/manage";
 import handlers from "@/handlers";
+
 import handlersManage from "@/handlersManage";
 import runRouter from "@/core/runServer";
 import { logger } from "@/common";
-import * as koaStatic from "koa-static";
+import * as koaStatic from "koa-static-router";
 
 const app = new Koa();
-const staticPath = "../resources";
-app.use(koaStatic(
-  path.join(__dirname, staticPath),
-));
+app.use(
+  koaStatic({
+    dir: "resources", // 文档路径
+    router: "/document", // 路由命名
+  }),
+);
 app.use(cors({
   origin: "*",
   allowHeaders: "*",
@@ -37,10 +38,10 @@ app.use(
 
 runRouter(app, [
   {
-    prefix: "/c", breezeApis: api, handles: handlers,
+    prefix: "/c", breezeApis: api, handlers: handlers,
   },
   {
-    prefix: "/m", breezeApis: apiManage, handles: handlersManage,
+    prefix: "/m", breezeApis: apiManage, handlers: handlersManage,
   },
 ], after);
 

@@ -32,7 +32,7 @@ let api: BreezeApi[] = [
     method: "POST",
     summary: "密码登录",
     description: "密码登录",
-    operationId: "authoginByPassword",
+    operationId: "loginByPassword",
     middlewares: [],
     req: {
       body: {

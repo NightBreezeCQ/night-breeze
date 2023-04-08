@@ -7,14 +7,14 @@ const DECIMAL_AS_STRING = true;
 
 const [dbFile, outputDir] = process.argv.slice(2);
 if (!dbFile || !outputDir) {
-  console.log("Usage: node ./sync-models.js <dbfile> <output>");
-  console.log("  e.g. node ./scripts/sync-models.js db.sql src/models");
+  console.log("Usage: ts-node ./sync-models.js <dbFile> <output>");
+  console.log("  e.g. ts-node ./scripts/sync-models.js db.sql src/models");
   process.exit();
 }
 
 const regionMarks = {
-  beginInterfaceAttrs: `${spaces(2)}// AutoGenIntefaceAttrBegin {`,
-  endInterfaceAttrs: `${spaces(2)}// } AutoGenIntefaceAttrEnd`,
+  beginInterfaceAttrs: `${spaces(2)}// AutoGenInterfaceAttrBegin {`,
+  endInterfaceAttrs: `${spaces(2)}// } AutoGenInterfaceAttrEnd`,
   beginModelAttrs: `${spaces(2)}// AutoGenModelAttrsBegin {`,
   endModelAttrs: `${spaces(2)}// } AutoGenModelAttrsEnd`,
   beginColumnDefs: `${spaces(8)}// AutoGenColumnDefsBegin {`,

@@ -1,16 +1,16 @@
 import { Sequelize, Model, DataTypes, NOW } from "sequelize";
-import settings from "@/settings";
+import envConfig from "@/config/envConfig";
 import * as jwt from "jsonwebtoken";
 
 interface UserAttributes {
-  // AutoGenIntefaceAttrBegin {
+  // AutoGenInterfaceAttrBegin {
   id?: number;
   createdAt?: Date;
   updatedAt?: Date;
   username?: string;
   password?: string;
   nickname?: string;
-  // } AutoGenIntefaceAttrEnd
+  // } AutoGenInterfaceAttrEnd
 }
 
 export default class User extends Model<UserAttributes, Partial<UserAttributes>> {
@@ -75,7 +75,7 @@ export default class User extends Model<UserAttributes, Partial<UserAttributes>>
     const result = {
       accessToken: accessToken,
       tokenType: "Bearer",
-      expiresIn: settings.tokenExpiresIn,
+      expiresIn: envConfig.tokenExpiresIn,
       id: this.id,
       username: this.username,
       nickname: this.nickname,
@@ -84,7 +84,7 @@ export default class User extends Model<UserAttributes, Partial<UserAttributes>>
   }
 
   public getAuthToken() {
-    const { tokenSecret, tokenExpiresIn } = settings;
+    const { tokenSecret, tokenExpiresIn } = envConfig;
     const token = jwt.sign(
       {
         id: this.id,

@@ -1,20 +1,20 @@
 import * as joi from "joi";
-import * as convert from "joi-to-json-schema";
+import j2s from "joi-to-swagger";
 import * as path from "path";
 import * as Koa from "koa";
 import * as verify from "./verify";
 import * as fs from "fs";
-import settings from "@/settings";
-import { Handler, typeApi, BreezeApi } from "@/type";
+import envConfig from "@/config/envConfig";
+import { Handler, BreezeApi } from "@/type";
 import * as Router from "@koa/router";
 import { errs, logger } from "@/common";
-const { port = 3000, host } = settings;
+const { port = 3000, host, swaggerConfig } = envConfig;
 
-const swaggerConfigDefalut = {
+const swaggerConfigDefault = {
   swagger: "2.0",
   info: {
     title: "接口文档",
-    description: "swagger defalut",
+    description: "swagger default",
     version: "1.0.0",
   },
   host: "127.0.0.1:3000",
@@ -30,7 +30,7 @@ type RunRouter = {
   prefix: string,
   breezeApis: BreezeApi[],
   // handles: { [key: string]: (a, b) => Promise<any> } = {},
-  handles: any,
+  handlers: any,
 };
 
 async function runServer(
@@ -41,13 +41,12 @@ async function runServer(
   const router = new Router();
   let swaggers = {};
   RunApis.forEach(RunApi => {
-    const { breezeApis, handles, prefix } = RunApi;
-    verify.apiVerify(breezeApis, handles); // 验证接口是否重复 处理方法是否重复
+    const { breezeApis, handlers, prefix } = RunApi;
+    verify.apiVerify(breezeApis, handlers); // 验证接口是否重复 处理方法是否重复
     swaggers[prefix] = {
-      ...swaggerConfigDefalut,
+      ...swaggerConfigDefault,
       paths: {},
     };
-    const { swaggerConfig, port = 3000, host } = settings;
 
     breezeApis.forEach(item => {
       let { path, summary = "概要", middlewares = [], description = "备注", operationId, req, res, docShow = true } = item;
@@ -80,12 +79,13 @@ async function runServer(
           s["in"] = "header";
           s["name"] = "authorization";
           s["type"] = "sting";
+          s["description"] = "用户鉴权";
           swaggers[prefix].paths[apiPath][methodLower].parameters.push(s);
         }
 
         if (params) {
           Object.keys(params).forEach(key => {
-            const s = convert(params[key]);
+            const { swagger: s } = j2s(params[key]);
             s["in"] = "path";
             s["name"] = key;
             swaggers[prefix].paths[apiPath][methodLower].parameters.push(s);
@@ -94,7 +94,7 @@ async function runServer(
 
         if (query) {
           Object.keys(query).forEach(key => {
-            const s = convert(query[key]);
+            const { swagger: s } = j2s(query[key]);
             s["in"] = "query";
             s["name"] = key;
             swaggers[prefix].paths[apiPath][methodLower].parameters.push(s);
@@ -103,7 +103,7 @@ async function runServer(
 
         if (body) {
           let bodySchema = joi.object(body);
-          const s = convert(bodySchema);
+          const { swagger: s } = j2s(bodySchema);
           swaggers[prefix].paths[apiPath][methodLower].parameters.push({
             in: "body",
             name: "body",
@@ -113,7 +113,7 @@ async function runServer(
 
         if (respBody) {
           let respBodySchema = joi.object(respBody);
-          const s = convert(respBodySchema);
+          const { swagger: s } = j2s(respBodySchema);
           swaggers[prefix].paths[apiPath][methodLower].responses["200"]["schema"] = s;
         }
       }
@@ -159,9 +159,9 @@ async function runServer(
         }
 
         try {
-          if (handles[operationId]) {
-            let handle = handles[operationId];
-            const result = await handle(request, ctx);
+          if (handlers[operationId]) {
+            let handler = handlers[operationId];
+            const result = await handler(request, ctx);
             if (result) ctx.body = result;
           }
         } catch (error) {

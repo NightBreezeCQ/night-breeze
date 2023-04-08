@@ -2,7 +2,7 @@ import { errs, logger } from "@/common";
 import Koa from "koa";
 import * as _ from "lodash";
 import { HttpError } from "@/common/errs";
-import settings from "@/settings";
+import envConfig from "@/config/envConfig";
 
 export default function error() {
   return async (ctx: Koa.Context, next: Koa.Next) => {
@@ -24,7 +24,7 @@ export default function error() {
       }
       logger.error(err.message);
       ctx.status = 500;
-      if (settings.prod) {
+      if (envConfig.prod) {
         ctx.body = errs.ErrInternal.toJson({ message: "server error" });
       } else {
         ctx.body = errs.ErrInternal.toJson({ message: err.message });

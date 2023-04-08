@@ -7,10 +7,12 @@ import * as joi from "joi";
 import { pascalCase } from 'change-case';
 const [apiFile] = process.argv.slice(2);
 if (!apiFile) {
-  console.log("Usage: node ./sync-apitype.js <jsona-file>");
+  console.log("Usage: ts-node ./sync-apiType.js <api-file>");
   process.exit();
 }
-const api = require(`../src/${apiFile}`);
+const api = require(`../src/apis/${apiFile}`);
+// import api from `../src/apis/${apiFile}`;
+
 async function main() {
   let data = ""
   for (const item of api.default) {
@@ -28,6 +30,7 @@ async function main() {
   }
   console.log(data)
   fs.writeFileSync(path.resolve(__dirname, `../src/type${pascalCase(apiFile)}.ts`), data, "utf8");
+  process.exit()
 }
 
 main()

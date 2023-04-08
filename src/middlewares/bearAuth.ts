@@ -1,7 +1,7 @@
 import { logger, errs } from "@/common";
 import Koa from "koa";
 import * as jwt from "jsonwebtoken";
-import settings from "@/settings";
+import envConfig from "@/config/envConfig";
 
 export function bearAuth() {
   return async (ctx: Koa.Context, next: Koa.Next) => {
@@ -17,7 +17,7 @@ export function bearAuth() {
       throw errs.ErrAuthToken.toError();
     }
     try {
-      data = jwt.verify(token, settings.tokenSecret);
+      data = jwt.verify(token, envConfig.tokenSecret);
     } catch (err) {
       throw errs.ErrAuthToken.toError();
     }
@@ -43,7 +43,7 @@ export function bearManageAuth() {
 
     let data: any;
     try {
-      data = jwt.verify(token, settings.tokenSecret);
+      data = jwt.verify(token, envConfig.tokenSecret);
     } catch (err) {
       throw errs.ErrAuthToken.toError();
     }

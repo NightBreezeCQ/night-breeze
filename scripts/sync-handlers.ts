@@ -15,7 +15,7 @@ if (!apiFile || !handlersName) {
   console.log("Usage: node ./sync-handlers.js <jsona-file> <handlers-name>");
   process.exit();
 }
-const api = require(`../src/${apiFile}`);
+const api = require(`../src/apis/${apiFile}`);
 
 const handlers = require(path.join(__dirname, "../src", handlersName));
 
@@ -35,7 +35,7 @@ function toOperation(operationId) {
 }
 
 function getOperationIds(spec) {
-  const result = [];
+  const result: any[] = [];
   for (const path in spec.paths) {
     const pathItem = spec.paths[path];
     for (const method of METHODS) {

@@ -1,6 +1,6 @@
 import * as Koa from "koa";
-import * as typeApi from "@/typeApi";
-import * as typeApiManage from "@/typeApiManage";
+import * as typeClient from "@/typeClient";
+import * as typeManage from "@/typeManage";
 import { Context, Next } from "koa";
 import { Schema } from "joi";
 
@@ -53,4 +53,4 @@ export type BreezeApi = {
   res?: BreezeApiRes;
 };
 
-export { typeApi, typeApiManage };
+export { typeClient, typeManage };

@@ -1,7 +1,7 @@
-
 import * as _ from "lodash";
-import envConfig from "@/envConfig";
 import { Options } from "sequelize";
+import * as fs from "fs";
+import * as path from "path";
 
 export type SequelizeConfig = {
   database: string;
@@ -10,7 +10,7 @@ export type SequelizeConfig = {
   options?: Options;
 };
 
-const settings = {
+let envConfig = {
   app: "Night-Breeze",
   host: "0.0.0.0",
   port: 3000,
@@ -33,7 +33,7 @@ const settings = {
       dialect: "mysql",
       host: "0.0.0.0",
       timezone: "+08:00",
-      logging: true,
+      logging: console.log,
       define: {
         timestamps: true,
         freezeTableName: true,
@@ -46,6 +46,15 @@ const settings = {
   },
 };
 
-_.merge(settings, envConfig);
+function mergeJson(data: any, file: string) {
+  file = path.resolve(process.env.CONFIG_DIR || process.cwd(), file);
+  try {
+    const content = fs.readFileSync(file, "utf8");
+    _.merge(data, JSON.parse(content));
+  } catch (err) {
+    console.log(err);
+  }
+}
 
-export default settings;
+mergeJson(envConfig, "src/config/.envConfig.json");
+export default envConfig;

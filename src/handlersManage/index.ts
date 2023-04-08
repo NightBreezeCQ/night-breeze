@@ -1,6 +1,8 @@
 
-import * as admin from "@/handlersManage/admin";
+import * as auth from "@/handlersManage/auth";
+import * as user from "@/handlersManage/user";
 
 export default {
-  ...admin,
+  ...auth,
+  ...user,
 };

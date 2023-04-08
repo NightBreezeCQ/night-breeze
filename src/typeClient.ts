@@ -13,7 +13,7 @@ export interface RegisterUsernameReq {
   };
 }
 
-export interface AuthoginByPasswordReq {
+export interface LoginByPasswordReq {
   params?: {};
   query?: {};
   body?: {

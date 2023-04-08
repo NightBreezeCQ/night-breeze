@@ -1,8 +1,8 @@
 import { configure, getLogger, Logger } from "log4js";
 import * as path from "path";
-import settings from "@/settings";
+import envConfig from "@/config/envConfig";
 
-const logDir = path.join(__dirname, `../../${settings.logger.dir}`);
+const logDir = path.join(__dirname, `../../${envConfig.logger.dir}`);
 configure({
   appenders: {
     log: {
@@ -21,7 +21,7 @@ configure({
     },
   },
   categories: {
-    default: { appenders: ["log", "files"], level: settings.logger.level },
+    default: { appenders: ["log", "files"], level: envConfig.logger.level },
 
   },
 

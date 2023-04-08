@@ -12,3 +12,14 @@ export interface LoginByPasswordReq {
     password: string;
   };
 }
+
+export interface UserListReq {
+  params?: {};
+  query?: {
+    /**
+     * 用户id
+     */
+    userId?: number;
+  };
+  body?: {};
+}
