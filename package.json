@@ -9,12 +9,12 @@
     "build": "tsc",
     "lint": "npx eslint --ext .ts src",
     "lint-fix": "npx eslint --ext .ts src --fix",
-    "sync:api": "npm run sync:type:api && npm run sync:handlers:api",
-    "sync:type:api": "ts-node ./scripts/sync-apitype.ts api",
-    "sync:handlers:api": "ts-node ./scripts/sync-handlers.ts api handlers",
-    "sync:apiManage": "npm run sync:type:apiManage && npm run sync:handlers:apiManage",
-    "sync:type:apiManage": "ts-node ./scripts/sync-apitype.ts apiManage",
-    "sync:handlers:apiManage": "ts-node ./scripts/sync-handlers.ts apiManage handlersManage",
+    "sync:client": "npm run sync:type:client && npm run sync:handlers:client",
+    "sync:type:client": "ts-node ./scripts/sync-type.ts client",
+    "sync:handlers:client": "ts-node ./scripts/sync-handlers.ts client handlers",
+    "sync:manage": "npm run sync:type:manage && npm run sync:handlers:manage",
+    "sync:type:manage": "ts-node ./scripts/sync-type.ts manage",
+    "sync:handlers:manage": "ts-node ./scripts/sync-handlers.ts manage handlersManage",
     "sync:models": " ts-node ./scripts/sync-models.ts db.sql src/models"
   },
   "repository": {

@@ -24,7 +24,7 @@ async function main() {
       query: joi.object(query),
       body: joi.object(body)
     })
-    console.log(item)
+    // console.log(item)
     const idInterface = await joiToInterface({ [typeName]: typeAttrs });
     data += idInterface + "\n"
   }

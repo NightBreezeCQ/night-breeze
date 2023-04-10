@@ -27,7 +27,7 @@ let todoContent = `import { Handler, ${typeApi} } from "@/type";\n`;
 todoContent += missOperationIds.map(id => toOperation(id)).join("");
 
 fs.writeFileSync(path.join(__dirname, "../src", handlersName, "__todo__.ts"), todoContent, "utf8");
-
+process.exit();
 function toOperation(operationId) {
   return `\nexport const ${operationId}: Handler<${typeApi}.${pascalCase(operationId)}Req> = async (req, ctx) => {
   ctx.body = "TO IMPLEMENTED";
