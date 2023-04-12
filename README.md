@@ -16,7 +16,9 @@ cp .\src\config\.envConfig.example.json .\src\config\.envConfig.json
 ```
 npm run start
 ```
-4. 文档地址：http://localhost:3000/document/index.html
+### 文档地址
+- 客户端文档：https://education-api.tcloudnt.com/swagger/index.html?url=/c/_/swagger.json
+- 管理端文档：https://education-api.tcloudnt.com/swagger/index.html?url=/m/_/swagger.json
 
 
 ## 开发须知
